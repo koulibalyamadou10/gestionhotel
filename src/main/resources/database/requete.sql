@@ -12,7 +12,7 @@ CREATE TABLE Client (
                         id NUMBER PRIMARY KEY,
                         nom VARCHAR2(100),
                         prenom VARCHAR2(100),
-                        adresse CLOB,
+                        adresse VARCHAR2(100),
                         tel VARCHAR2(20),
                         email VARCHAR2(100),
                         nationalite VARCHAR2(50)
@@ -33,7 +33,7 @@ CREATE TABLE Chambre (
                          numero VARCHAR2(10) UNIQUE,
                          type VARCHAR2(50),
                          prix DECIMAL(10,2),
-                         disponibilite NUMBER(1) -- Remplacé BOOLEAN par NUMBER(1)
+                         disponibilite NUMBER(1)
 );
 
 -- Trigger pour l'auto-incrémentation de l'ID dans Chambre
