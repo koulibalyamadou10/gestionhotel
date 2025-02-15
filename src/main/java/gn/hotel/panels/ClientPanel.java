@@ -1,6 +1,7 @@
 package gn.hotel.panels;
 
 import gn.hotel.base.KPanel;
+import gn.hotel.components.ClientProfile;
 import gn.hotel.interfaces.IClient;
 import gn.hotel.models.Client;
 
@@ -117,9 +118,73 @@ public class ClientPanel extends KPanel implements IClient {
             client.setNationalite(txtNationalite.getSelectedItem().toString());
             createClient(client);
         });
-        //btnModifier.addActionListener(e -> updateClient());
-        //btnSupprimer.addActionListener(e ->deleteClient ());
-        //btnAfficher.addActionListener(e ->viewClient ());
+        btnModifier.addActionListener(e -> {
+            Client client = new Client();
+            int selectedRow = tableClients.getSelectedRow();
+            if( selectedRow == -1){
+                JOptionPane.showMessageDialog(this, "Aucune ligne selectionné !");
+                return;
+            }
+            String nom = txtNom.getText();
+            String prenom = txtPrenom.getText();
+            String adresse = txtAdresse.getText();
+            String telephone = txtTel.getText();
+            String email = txtEmail.getText();
+
+
+            if( nom.isEmpty() ){
+                txtNom.requestFocus();
+                return;
+            }else if( prenom.isEmpty() ){
+                txtPrenom.requestFocus();
+                return;
+            }
+            else if(adresse.isEmpty()){
+                txtAdresse.requestFocus();
+                return;
+            }
+            else if(telephone.isEmpty()){
+                txtTel.requestFocus();
+                return;
+            }
+            else if(email.isEmpty()){
+                txtEmail.requestFocus();
+                return;
+            }
+
+            client.setId(Integer.parseInt(tableClients.getValueAt(selectedRow,0).toString()));
+            client.setNom(nom);
+            client.setPrenom(prenom);
+            client.setAdresse(adresse);
+            client.setTel(telephone);
+            client.setEmail(email);
+            client.setNationalite(txtNationalite.getSelectedItem().toString());
+            updateClient(client);
+        });
+        btnSupprimer.addActionListener(e ->{
+            Client client = new Client();
+            int selectedRow = tableClients.getSelectedRow();
+            if( selectedRow == -1){
+                JOptionPane.showMessageDialog(this, "Aucune ligne selectionné !");
+                return;
+            }
+
+            int choix = JOptionPane.showConfirmDialog(this, "Êtes-vous sûr de vouloir supprimer ce client ?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+            if (choix != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            client.setId(Integer.parseInt(tableClients.getValueAt(selectedRow,0).toString()));
+            deleteClient(client);
+        });
+
+        btnAfficher.addActionListener(e -> {
+            Client client = new Client(); // Remplace par l'objet client concerné
+            client.setId(1); // Remplace par l'ID du client sélectionné
+            ClientProfile.afficherProfil(client, connection);
+        });
+
 
         //viewClient(); // Charger la liste au démarrage
     }
@@ -127,6 +192,19 @@ public class ClientPanel extends KPanel implements IClient {
     @Override
     public void createClient(Client client) {
         try {
+            // Vérifier si l'email existe déjà
+            String checkEmailQuery = "SELECT COUNT(*) FROM client WHERE email = ?";
+            PreparedStatement checkStmt = connection.prepareStatement(checkEmailQuery);
+            checkStmt.setString(1, client.getEmail());
+            ResultSet rs = checkStmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                // Si l'email existe, afficher une boîte de dialogue et arrêter l'insertion
+                JOptionPane.showMessageDialog(null, "Cet email est déjà utilisé. Veuillez en choisir un autre.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Si l'email n'existe pas, insérer le client
             String requete = "INSERT INTO client(nom, prenom, adresse, tel, email, nationalité) VALUES(?, ?, ?, ?, ?, ?)";
             PreparedStatement ps = connection.prepareStatement(requete);
             ps.setString(1, client.getNom());
@@ -136,11 +214,16 @@ public class ClientPanel extends KPanel implements IClient {
             ps.setString(5, client.getEmail());
             ps.setString(6, client.getNationalite());
             ps.executeUpdate();
-            JOptionPane.showMessageDialog(this, "Client ajouté !");
+
+            // Afficher un message de succès
+            JOptionPane.showMessageDialog(null, "Client ajouté avec succès !", "Succès", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Une erreur est survenue lors de l'ajout du client.", "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
     @Override
     public void updateClient(Client client) {
@@ -168,19 +251,14 @@ public class ClientPanel extends KPanel implements IClient {
 
     @Override
     public void deleteClient(Client client) {
-        int selectedRow = tableClients.getSelectedRow();
-        if (selectedRow != -1) {
-            try {
-                String requete = "DELETE FROM client WHERE id=?";
-                PreparedStatement ps = connection.prepareStatement(requete);
-                ps.setLong(1, (Long) tableModel.getValueAt(selectedRow, 0));
-                ps.executeUpdate();
-                JOptionPane.showMessageDialog(this, "Client supprimé !");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            JOptionPane.showMessageDialog(this, "Sélectionnez un client !");
+        try {
+            String requete = "DELETE FROM client WHERE id=?";
+            PreparedStatement ps = connection.prepareStatement(requete);
+            ps.setInt(1, client.getId() );
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Client supprimé !");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
