@@ -27,6 +27,9 @@ public class KPanel extends JPanel {
     public static final int FLAT_SVG_ICON_SIZE = 25;
     public static final int K_MENU_LEFT_WIDTH = 55;
 
+    // Tailles
+    public static final int ICON_SIZE = 25;
+
     // Icones de menus
     public static final FlatSVGIcon clientIcon = new FlatSVGIcon("svgs/client.svg", FLAT_SVG_ICON_SIZE, FLAT_SVG_ICON_SIZE);
     public static final FlatSVGIcon reservationIcon = new FlatSVGIcon("svgs/reservation.svg", FLAT_SVG_ICON_SIZE, FLAT_SVG_ICON_SIZE);
