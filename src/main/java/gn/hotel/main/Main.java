@@ -15,7 +15,7 @@ public class Main extends JFrame {
     public static Main main;
 
     public static ClientPanel clientPanel = new ClientPanel();
-    public static ResevervationPanel resevervationPanel = new ResevervationPanel();
+    public static ReservationPanel reservationPanel = new ReservationPanel();
     public static ChambrePanel chambrePanel = new ChambrePanel();
     public static ServicePanel servicePanel = new ServicePanel();
     public static FacturePanel facturePanel = new FacturePanel();

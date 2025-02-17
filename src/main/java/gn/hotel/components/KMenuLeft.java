@@ -107,7 +107,7 @@ public class KMenuLeft extends KPanel {
         System.out.println(toolTipText);
         switch (toolTipText) {
             case MENU_LEFT_ELEMENT_CLIENT -> updateMainUI(clientPanel);
-            case MENU_LEFT_ELEMENT_RESERVATION -> updateMainUI(resevervationPanel);
+            case MENU_LEFT_ELEMENT_RESERVATION -> updateMainUI(reservationPanel);
             case MENU_LEFT_ELEMENT_CHAMBRE -> updateMainUI(chambrePanel);
             case MENU_LEFT_ELEMENT_FACTURE -> updateMainUI(facturePanel);
             case MENU_LEFT_ELEMENT_EMPLOYEE -> updateMainUI(employePanel);

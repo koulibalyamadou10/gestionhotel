@@ -44,9 +44,9 @@ public class KPanel extends JPanel {
     // Autres icones
     public static final FlatSVGIcon sendIcon = new FlatSVGIcon("svgs/send.svg", FLAT_SVG_ICON_SIZE, FLAT_SVG_ICON_SIZE);
 
-    public KPanel() {
-        connectToDatabase();
-    }
+    //public KPanel() {
+    //    connectToDatabase();
+    //}
 
     public void connectToDatabase() {
         Properties properties = new Properties();
@@ -59,11 +59,11 @@ public class KPanel extends JPanel {
         try{
             System.out.println(properties.getProperty("jdbc.driver.class"));
             Class.forName(properties.getProperty("jdbc.driver.class"));
-            connection = DriverManager.getConnection(
-                    properties.getProperty("jdbc.url"),
-                    properties.getProperty("jdbc.login"),
-                    properties.getProperty("jdbc.password")
-            );
+            //connection = DriverManager.getConnection(
+             //       properties.getProperty("jdbc.url"),
+             //       properties.getProperty("jdbc.login"),
+             //       properties.getProperty("jdbc.password")
+            //);
         } catch (Exception e) {
             e.printStackTrace(System.err);
         }
