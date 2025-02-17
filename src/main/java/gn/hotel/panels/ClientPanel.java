@@ -1,5 +1,6 @@
 package gn.hotel.panels;
 
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import gn.hotel.base.KPanel;
 import gn.hotel.components.ActionButtonEditor;
 import gn.hotel.components.ActionButtonRenderer;
@@ -62,7 +63,7 @@ public class ClientPanel extends KPanel implements IClient {
         txtNationalite.setPreferredSize(new Dimension(txtNationalite.getPreferredSize().width, 30));
         formPanel.add(txtNationalite, "cell 1 5, growx, h 30!");
 
-        btnAjouter = new JButton("Ajouter");
+        btnAjouter = new JButton("Ajouter", new ImageIcon("/svgs/call.svg"));
         btnAjouter.setPreferredSize(new Dimension(btnAjouter.getPreferredSize().width, 35)); // Bouton légèrement plus grand
         formPanel.add(btnAjouter, "cell 0 6, span 2, growx, gaptop 10, h 35!");
 
@@ -78,7 +79,7 @@ public class ClientPanel extends KPanel implements IClient {
         buttonPanel.add(btnSupprimer);
         buttonPanel.add(btnAfficher);
 
-        add(buttonPanel, BorderLayout.EAST);
+//        add(buttonPanel, BorderLayout.EAST);
 
         // 🟢 Section Tableau
         tableModel = new DefaultTableModel(

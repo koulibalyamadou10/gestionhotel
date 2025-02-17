@@ -14,15 +14,6 @@ public class Main extends JFrame {
     // Gestion du thème
     public static Main main;
 
-    public static ClientPanel clientPanel = new ClientPanel();
-    public static ResevervationPanel resevervationPanel = new ResevervationPanel();
-    public static ChambrePanel chambrePanel = new ChambrePanel();
-    public static ServicePanel servicePanel = new ServicePanel();
-    public static FacturePanel facturePanel = new FacturePanel();
-    public static EmployePanel employePanel = new EmployePanel();
-    public static StatistiquePanel statistiquePanel = new StatistiquePanel();
-    public static SettingsPanel settingsPanel = new SettingsPanel();
-
     // Constructeur principal
     public Main() {
         initUI();
@@ -61,7 +52,7 @@ public class Main extends JFrame {
         contentPane.setLayout(new BorderLayout());
 
         contentPane.add(new KMenuLeft(this), BorderLayout.WEST);
-        contentPane.add(clientPanel, BorderLayout.CENTER);
+        contentPane.add(new ClientPanel(), BorderLayout.CENTER);
     }
 
     // Point d'entrée de l'application
