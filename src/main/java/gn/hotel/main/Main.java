@@ -51,6 +51,7 @@ public class Main extends JFrame {
         JPanel contentPane = (JPanel) getContentPane();
         contentPane.setLayout(new BorderLayout());
 
+
         contentPane.add(new KMenuLeft(this), BorderLayout.WEST);
         contentPane.add(new ClientPanel(), BorderLayout.CENTER);
     }
