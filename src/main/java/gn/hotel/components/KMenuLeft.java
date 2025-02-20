@@ -106,14 +106,14 @@ public class KMenuLeft extends KPanel {
         String toolTipText = button.getToolTipText();
         System.out.println(toolTipText);
         switch (toolTipText) {
-            case MENU_LEFT_ELEMENT_CLIENT -> updateMainUI(clientPanel);
-            case MENU_LEFT_ELEMENT_RESERVATION -> updateMainUI(resevervationPanel);
-            case MENU_LEFT_ELEMENT_CHAMBRE -> updateMainUI(chambrePanel);
-            case MENU_LEFT_ELEMENT_FACTURE -> updateMainUI(facturePanel);
-            case MENU_LEFT_ELEMENT_EMPLOYEE -> updateMainUI(employePanel);
-            case MENU_LEFT_ELEMENT_SERVICE -> updateMainUI(servicePanel);
-            case MENU_LEFT_ELEMENT_STATISTIQUE -> updateMainUI(statistiquePanel);
-            case MENU_LEFT_ELEMENT_SETTINGS -> updateMainUI(settingsPanel);
+            case MENU_LEFT_ELEMENT_CLIENT -> updateMainUI(new ClientPanel());
+            case MENU_LEFT_ELEMENT_RESERVATION -> updateMainUI(new ReservationPanel());
+            case MENU_LEFT_ELEMENT_CHAMBRE -> updateMainUI(new ChambrePanel());
+            case MENU_LEFT_ELEMENT_FACTURE -> updateMainUI(new FacturePanel());
+            case MENU_LEFT_ELEMENT_EMPLOYEE -> updateMainUI(new EmployePanel());
+            case MENU_LEFT_ELEMENT_SERVICE -> updateMainUI(new ServicePanel());
+            case MENU_LEFT_ELEMENT_STATISTIQUE -> updateMainUI(new StatistiquePanel());
+            case MENU_LEFT_ELEMENT_SETTINGS -> updateMainUI(new SettingsPanel());
             case MENU_LEFT_ELEMENT_LOGOUT -> btnLogoutListener(actionEvent);
         }
     }
